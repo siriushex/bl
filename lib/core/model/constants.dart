@@ -28,7 +28,7 @@ abstract class Constants {
 
   static const telegramBotUsername = String.fromEnvironment(
     'telegram_bot_username',
-    defaultValue: 'VPNHubBot',
+    defaultValue: 'ZeonConnectBot',
   );
 
   static const telegramBotStartParameter = String.fromEnvironment(
@@ -40,6 +40,9 @@ abstract class Constants {
     'deep_link_scheme',
     defaultValue: 'vpnhub',
   );
+
+  static Uri get telegramBotAppLink =>
+      Uri.parse('tg://resolve?domain=$telegramBotUsername');
 
   static Uri get telegramBotWebLink =>
       Uri.parse('https://t.me/$telegramBotUsername');
