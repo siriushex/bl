@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hiddify/core/preferences/general_preferences.dart';
 import 'package:hiddify/core/router/routes.dart';
+import 'package:hiddify/features/auth/notifier/auth_notifier.dart';
 import 'package:hiddify/features/deep_link/notifier/deep_link_notifier.dart';
 import 'package:hiddify/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -41,6 +42,7 @@ GoRouter router(RouterRef ref) {
     routes: [
       if (useMobileRouter) $mobileWrapperRoute else $desktopWrapperRoute,
       $introRoute,
+      $authRoute,
     ],
     refreshListenable: notifier,
     redirect: notifier.redirect,
@@ -99,10 +101,25 @@ class RouterListenable extends _$RouterListenable
     // if (this.state.isLoading || this.state.hasError) return null;
 
     final isIntro = state.uri.path == const IntroRoute().location;
+    final isAuthRoute = state.uri.path == const AuthRoute().location;
 
     if (!_introCompleted) {
       return const IntroRoute().location;
     } else if (isIntro) {
+      return const HomeRoute().location;
+    }
+
+    final authState = ref.read(authNotifierProvider);
+    if (authState.isLoading) {
+      return isAuthRoute ? null : const AuthRoute().location;
+    }
+
+    final session = authState.valueOrNull;
+    if (session == null) {
+      if (!isAuthRoute) {
+        return const AuthRoute().location;
+      }
+    } else if (isAuthRoute) {
       return const HomeRoute().location;
     }
 
