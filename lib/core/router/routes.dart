@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hiddify/core/router/app_router.dart';
+import 'package:hiddify/features/auth/widget/auth_page.dart';
 import 'package:hiddify/features/common/adaptive_root_scaffold.dart';
 import 'package:hiddify/features/config_option/overview/config_options_page.dart';
 import 'package:hiddify/features/config_option/widget/quick_settings_modal.dart';
-
 import 'package:hiddify/features/home/widget/home_page.dart';
 import 'package:hiddify/features/intro/widget/intro_page.dart';
 import 'package:hiddify/features/log/overview/logs_overview_page.dart';
@@ -157,6 +157,20 @@ class IntroRoute extends GoRouteData {
       fullscreenDialog: true,
       name: name,
       child: IntroPage(),
+    );
+  }
+}
+
+@TypedGoRoute<AuthRoute>(path: "/auth", name: AuthRoute.name)
+class AuthRoute extends GoRouteData {
+  const AuthRoute();
+  static const name = "Auth";
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return const MaterialPage(
+      name: name,
+      child: AuthPage(),
     );
   }
 }
