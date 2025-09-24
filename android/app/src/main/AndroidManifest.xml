@@ -28,7 +28,7 @@
         android:name=".Application"
         android:banner="@mipmap/ic_banner"
         android:icon="@mipmap/ic_launcher"
-        android:label="Hiddify"
+        android:label="VPNHub"
         android:roundIcon="@mipmap/ic_launcher_round"
         tools:targetApi="31">
 
@@ -78,6 +78,15 @@
                 <data android:host="install-sub" />
                 <data android:scheme="hiddify" />
                 <data android:host="import" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="vpnhub" android:host="auth" />
             </intent-filter>
 
             <intent-filter>
