@@ -20,6 +20,12 @@ class SettingsOverviewPage extends HookConsumerWidget {
           ),
           SliverList.list(
             children: [
+              const SettingsSection('Account'),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: AccountSettingTiles(),
+              ),
+              const SettingsDivider(),
               SettingsSection(t.settings.general.sectionTitle),
               const GeneralSettingTiles(),
               const PlatformSettingsTiles(),
